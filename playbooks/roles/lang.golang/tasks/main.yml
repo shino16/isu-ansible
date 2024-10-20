@@ -3,16 +3,36 @@
   file:
     path: "/usr/local/golang-{{ version }}"
     state: directory
+    
+- name: Check if file exists
+  become: yes
+  stat:
+    path: "{{ item }}"
+  register: file_stats
+  with_items:
+    - /tmp/go{{ version }}.{{ arch }}.tar.gz
+    - /usr/local/go
+
+- name: This command will change the working directory to somedir/
+  command: find /tmp -type f
+  register: find
+  
+- debug: msg="{{ find.stdout }}"
 
 - name: get specified version archive
   become: yes
   get_url:
     url: "{{ golang.src }}"
     dest: /tmp
-    
+  when:
+    - file_stats.results[0].stat.exists == False
+    - file_stats.results[1].stat.exists == False
+
 - name: This command will change the working directory to somedir/
-  ansible.builtin.shell:
-    cmd: find /tmp -type f
+  command: find /tmp -type f
+  register: find
+  
+- debug: msg="{{ find.stdout }}"
 
 - name: unarchive specified version package  
   become: yes
