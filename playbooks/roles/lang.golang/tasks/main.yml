@@ -13,8 +13,8 @@
     - /tmp/go{{ version }}.{{ arch }}.tar.gz
     - /usr/local/go
 
-- name: This command will change the working directory to somedir/
-  command: find /tmp -type f
+- name: Find
+  command: echo "<find>" && find /tmp -type f && echo "</find>"
   register: find
   
 - debug: msg="{{ find.stdout }}"
