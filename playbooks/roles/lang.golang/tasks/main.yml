@@ -9,6 +9,11 @@
   get_url:
     url: "{{ golang.src }}"
     dest: /tmp
+    
+- name: This command will change the working directory to somedir/
+  ansible.builtin.shell:
+    cmd: find /tmp -type f
+
 - name: unarchive specified version package  
   become: yes
   unarchive:
