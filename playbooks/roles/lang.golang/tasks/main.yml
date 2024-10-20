@@ -30,6 +30,12 @@
   command: tar xvzf /tmp/go{{ version }}.{{ arch }}.tar.gz -C /usr/local/go/
   when: file_stats.results[1].stat.exists == False
 
+- name: Find
+  command: find /tmp -type f
+  register: find
+  
+- debug: msg="{{ find.stdout }}"
+
 - name: add golang path
   become: yes
   template:
