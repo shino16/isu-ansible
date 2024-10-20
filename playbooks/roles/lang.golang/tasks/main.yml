@@ -4,15 +4,6 @@
     path: "/usr/local/golang-{{ version }}"
     state: directory
 
-- name: Check if file exists
-  become: yes
-  stat:
-    path: "{{ item }}"
-  register: file_stats
-  with_items:
-    - /tmp/go{{ version }}.{{ arch }}.tar.gz
-    - /usr/local/golang-{{ version }}/go
-
 - name: get specified version archive
   become: yes
   get_url:
