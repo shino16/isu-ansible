@@ -13,8 +13,8 @@
     - /tmp/go{{ version }}.{{ arch }}.tar.gz
     - /usr/local/go
 
-- name: Find
-  command: find /tmp -type f
+- name: ls /tmp -l
+  command: ls /tmp -l
   register: find
   
 - debug: msg="{{ find.stdout }}"
@@ -28,8 +28,8 @@
     - file_stats.results[0].stat.exists == False
     - file_stats.results[1].stat.exists == False
 
-- name: Find
-  command: find /tmp -type f
+- name: ls /tmp -l
+  command: ls /tmp -l
   register: find
   
 - debug: msg="{{ find.stdout }}"
