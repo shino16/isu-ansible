@@ -25,12 +25,9 @@
     - file_stats.results[0].stat.exists == False
     - file_stats.results[1].stat.exists == False
 
-
 - name: unarchive specified version package  
   become: yes
-  unarchive:
-    src: /tmp/go{{ version }}.{{ arch }}.tar.gz
-    dest: /usr/local/go/
+  command: tar xvzf /tmp/go{{ version }}.{{ arch }}.tar.gz -C /usr/local/go/
   when: file_stats.results[1].stat.exists == False
 
 - name: add golang path
