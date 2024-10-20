@@ -31,7 +31,7 @@
   when: file_stats.results[1].stat.exists == False
 
 - name: Find
-  command: find /tmp -type f
+  command: find /usr/local/go -type f
   register: find
   
 - debug: msg="{{ find.stdout }}"
