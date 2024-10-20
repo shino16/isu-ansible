@@ -7,6 +7,12 @@
     - /tmp/go{{ version }}.{{ arch }}.tar.gz
     - /usr/local/go
 
+- name: ls /tmp -l
+  command: ls /tmp -l
+  register: find
+  
+- debug: msg="{{ find.stdout }}"
+
 - name: get specified version archive
   become: yes
   get_url:
@@ -25,13 +31,17 @@
     - file_stats.results[0].stat.exists == False
     - file_stats.results[1].stat.exists == False
 
+- name: ls /tmp -l
+  command: ls /tmp -l
+  register: find
+  
+- debug: msg="{{ find.stdout }}"
 
 - name: unarchive specified version package  
   become: yes
   unarchive:
     src: /tmp/go{{ version }}.{{ arch }}.tar.gz
     dest: /usr/local/go/
-  when: file_stats.results[1].stat.exists == False
 
 - name: add golang path
   become: yes
