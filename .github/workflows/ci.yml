@@ -3,7 +3,7 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches: [master]
+    branches: [master, go]
 jobs:
   docker:
     runs-on: ubuntu-latest
