@@ -19,7 +19,7 @@ jobs:
       - name: ansible --version
         run: ansible --version
       - name: Run ansible playbook
-        run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/docker.yml -D
+        run: ansible-playbook -vvv -i 'mycontainer,' -c docker -u root playbooks/docker.yml -D
 
       - name: Dry Run ansible playbook
         run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/docker.yml -DC
