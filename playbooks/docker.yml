@@ -2,4 +2,12 @@
 - hosts: all
   roles:
     - common.common
+    - post.discordcat
+    - lb.nginx
+    - lb.restart
+    - prepare.clear_nginx_log
+    - util.netdata
+    - db.pt_query_digest
+    - lb.alp
+    - lang.rust
     - lang.golang
